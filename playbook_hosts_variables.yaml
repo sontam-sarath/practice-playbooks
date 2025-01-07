@@ -1,0 +1,15 @@
+---
+- name: playbook to install apache deploy website using hosts variables
+  hosts: 172.31.11.128
+  become: true
+  tasks:
+    - name: install package
+      apt:
+        name: "{{ var1 }}"
+        state: "{{ var4 }}"
+        update_cache: "{{ var5 }}"
+    - name: modify default content
+      copy:
+        content: "{{ var2 }}"
+        dest: "{{ var3 }}"
+...

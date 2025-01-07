@@ -1,0 +1,22 @@
+---
+- name: Playbook to launch a website
+  hosts: sarath
+  become: true
+  tasks:
+    - name: install apache2
+      apt:
+        name: ["apache2"]
+        state: present
+        update_cache: yes
+    - name: update code
+      copy:
+        content: "<h1> sarath is in tension. Whay are you lazy idiot!!! stupid!!</h1>"
+        dest: /var/www/html/index.html
+      tags: untagged
+    - name: create user
+      user:
+        name: rana
+    - name: restart apache2
+      service:
+        name: apache2
+        state: restarted

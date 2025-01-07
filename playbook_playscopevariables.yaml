@@ -1,0 +1,26 @@
+---
+- name: Playbook to install tomcat, change the port, restart tomcat and deploy and application
+  hosts: sarath    
+  vars:
+    tomcat_version: tomcat10
+  become: true
+  tasks:
+    - name: install tomcat
+      apt:
+        name: "{{ tomcat_version }}"
+        stae: present
+        update_cache: yes
+    - name: change the port
+      replace:
+        regexp: 8080
+        replace: 9090
+        path: "/etc/{{ tomcat_version }}/server.xml"
+    - name: restart tomcat10
+      service:
+        name: "{{ tomcat_version }}"
+        state: restarted
+    - name: deploy an application
+      copy:
+        src: devops.war
+        dest: "/var/lib/{{ tomcat_version }}/webapps/"
+...

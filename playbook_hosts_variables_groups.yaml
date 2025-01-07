@@ -1,0 +1,13 @@
+---
+- name: playbook to create users
+  hosts: sarath
+  become: true
+  tasks:
+    - name: create user
+      user:
+        name: "{{ item }}"
+      with_items:
+        - "{{ user1 }}"
+        - "{{ user2 }}"
+        - "{{ user3 }}"
+...

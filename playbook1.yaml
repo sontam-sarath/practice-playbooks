@@ -1,0 +1,13 @@
+---
+- name: Playbook to install elinks
+  hosts: all
+  become: true
+  tasks:
+    - name: install elinks
+      apt:
+        name: elinks
+        state: present
+        update_cache: yes
+...
+
+# equivalent ansible adhoc command: ansible all -m apt 'name=elinks state=present update_cache:yes' -b

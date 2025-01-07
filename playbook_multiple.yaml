@@ -1,0 +1,26 @@
+---
+- name: Playbook to install elinks in group1
+  hosts: sarath
+  become: true
+  tasks:
+    - name: install elinks
+      apt:
+        name: elinks
+        state: present
+        update_cache: yes
+    - name: install apache2
+      apt:
+        name: apache2
+        state: present
+        update_cache: yes
+
+- name: Playbook to install tree in group2
+  hosts: linux
+  become: true
+  tasks:
+    - name: install tree
+      yum:
+        name: tree
+        state: present
+        update_cache: yes
+...

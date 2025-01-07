@@ -1,0 +1,16 @@
+---
+- name: playbook to install packages using loops
+  hosts: sarath
+  become: true
+  tasks:
+    - name: install packages
+      apt:
+        name: "{{ item.a }}"
+        state: "{{ item.b }}"
+        update_cache: yes
+      with_items:
+        - {a: figlet, b: present}
+        - {a: apache2, b: latest}
+        - {a: tomcat10, b: absent}
+        - {a: git, b: latest}
+...

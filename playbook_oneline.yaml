@@ -1,0 +1,31 @@
+---
+- name: Playbook to install elinks in group1
+  hosts: sarath
+  become: true
+  tasks:
+    - name: install all packages
+      apt:
+        name: ["git", "maven", "tree", "elinks", "apache2", "figlet"]
+        state: present
+        update_cache: yes
+
+- name: Playbook to install tree in group2
+  hosts: linux
+  become: true
+  tasks:
+    - name: install tree
+      yum:
+        name: ["git", "maven", "tree", "tomcat10", "figlet"]
+        state: present
+        update_cache: yes
+
+- name: Playbook to uninstall tree in group2
+  hosts: linux
+  become: true
+  tasks:
+    - name: install tree
+      yum:
+        name: ["git"]
+        state: present
+        update_cache: yes
+...
