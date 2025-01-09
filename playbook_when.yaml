@@ -1,0 +1,14 @@
+---
+- name: install a package based on condition
+  hosts: all
+  vars:
+    num: 50
+  become: true
+  tasks:
+    - name: install package git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      when:
+        num == 50

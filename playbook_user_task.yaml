@@ -1,0 +1,19 @@
+---
+- name: write a playbook to create a user and if the user is already created, do nothing. But if the user is newly created, update his password.
+  hosts: all
+  become: true
+  tasks:
+    - name: Create a user if not exists
+      user:
+        name: sarath_new #this user is already existed - testing this scenario
+      register: user_logs
+    - name: write logs
+      debug:
+        var: user_logs
+    - name: if user exists, update password.
+      user:
+        name: sarath_new
+        password: 123456
+      when:
+        user_logs.changed==false
+...

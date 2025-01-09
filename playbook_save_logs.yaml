@@ -1,0 +1,15 @@
+---
+- name: install a package to check if we can save logs
+  hosts: all
+  become: true
+  tasks:
+    - name: install package git
+      apt:
+        name: git
+        state: present
+        update_cache: yes
+      register: results
+    - name: print the logs
+      debug:
+        var: results
+

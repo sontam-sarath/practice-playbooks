@@ -1,0 +1,24 @@
+
+PLAY [install a package to check if we can save logs] **************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.11.128]
+fatal: [172.31.16.243]: UNREACHABLE! => {"changed": false, "msg": "Failed to connect to the host via ssh: ssh: connect to host 172.31.16.243 port 22: No route to host", "unreachable": true}
+
+TASK [install package git] *****************************************************
+ok: [172.31.11.128]
+
+TASK [print the logs] **********************************************************
+ok: [172.31.11.128] => {
+    "results": {
+        "cache_update_time": 1736300750,
+        "cache_updated": true,
+        "changed": false,
+        "failed": false
+    }
+}
+
+PLAY RECAP *********************************************************************
+172.31.11.128              : ok=3    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.31.16.243              : ok=0    changed=0    unreachable=1    failed=0    skipped=0    rescued=0    ignored=0   
+

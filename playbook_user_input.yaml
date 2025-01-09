@@ -1,0 +1,23 @@
+---
+- name: create user
+  hosts: sarath
+  vars_prompt:
+    - name: user_name
+      prompt: "Enter user name"
+  become: true
+  tasks:
+    - name: create user
+      user:
+        name: "{{ user_name }}"
+      register: user_logs
+    - name: output logs
+      debug:
+        var: user_logs
+    - name: update password
+      user:
+        name: "{{ user_name }}"
+        password: 12345687
+      when:
+        user_logs.changed==true
+...
+
