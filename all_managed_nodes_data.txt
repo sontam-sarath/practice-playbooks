@@ -1,0 +1,19 @@
+
+PLAY [get ansbile os family of all hosts] **************************************
+
+TASK [Gathering Facts] *********************************************************
+ok: [172.31.16.243]
+ok: [172.31.11.128]
+
+TASK [get family name] *********************************************************
+ok: [172.31.11.128] => {
+    "msg": "OS Family: Debian"
+}
+ok: [172.31.16.243] => {
+    "msg": "OS Family: RedHat"
+}
+
+PLAY RECAP *********************************************************************
+172.31.11.128              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+172.31.16.243              : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

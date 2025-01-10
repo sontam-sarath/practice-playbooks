@@ -1,0 +1,10 @@
+---
+- name: get ansbile os family of all hosts
+  hosts: all
+  become: true
+  tasks:
+    - name: get family name
+      debug:
+        msg: "OS Family: {{ ansible_os_family }}"
+...
+

@@ -1,0 +1,22 @@
+- name: Install and manage a web server
+  hosts: all
+  become: true
+  tasks:
+    - name: Install nginx or httpd based on preference
+      vars:
+        webserver: "httpd"  # Change this to "httpd" if you prefer Apache
+      package:
+        name: "{{ webserver }}"
+        state: present
+        update_cache: yes
+      when: ansible_os_family == "Debian"
+      register: logs
+    - name: show logs
+      debug:
+        var: logs
+
+    - name: Ensure the web server service is running and enabled
+      service:
+        name: "{{ webserver }}"
+        state: started
+        enabled: true

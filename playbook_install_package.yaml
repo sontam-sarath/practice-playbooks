@@ -1,0 +1,31 @@
+---
+- name: Install a specific package (e.g., nginx or httpd) on multiple servers. Ensure the service is running and enabled on boot.
+  hosts: all
+  vars_prompt:
+    - name: package_name
+      prompt: "Enter your package name (nginx/httpd): "
+      private: false
+  become: true
+  tasks:
+    - name: install package
+      apt:
+        name: "{{ package_name }}"
+        state: present
+        update_cache: yes
+      when:
+        ansible_os_family == "Debian" and  package_name == 'nginx'
+      register: install_apt_logs
+    - name: print logs
+      debug:
+        var: install_apt_logs
+    - name: install package yum
+      yum:
+        name: "{{ package_name }}"
+        state: present
+        update_cache: yes
+      when: ansible_os_family == 'RedHat' and package_name == 'httpd'
+      register: install_yum_logs
+    - name: print logs
+      debug:
+        var: install_yum_logs
+...

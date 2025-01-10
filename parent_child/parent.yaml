@@ -1,0 +1,11 @@
+---
+- name: parent playbook, that run all the child elements
+  hosts: all
+  become: true
+  tasks:
+    - name: call child elements
+#      include: is the old version of inmporting child files
+      include_tasks: "{{ item }}"
+      with_items:
+        - createuser.yaml
+        - installjava.yaml
