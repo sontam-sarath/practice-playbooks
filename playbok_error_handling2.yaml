@@ -1,0 +1,15 @@
+---
+- name: error handling
+  hosts: all
+  become: true
+  tasks:
+    - block:
+      - name: install elinks
+        yum:
+          name: elinks
+          state: present
+      rescue:
+      - name: install elinks
+        apt:
+          name: elinks
+          state: present

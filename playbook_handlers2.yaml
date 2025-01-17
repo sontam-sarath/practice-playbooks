@@ -1,0 +1,27 @@
+---
+- name: handlers in playbooks, install tomcat, and tomcat_admin
+  hosts: all
+  become: true
+  tasks:
+    - name: install tomcat10
+      apt:
+        name: tomcat10
+        state: present
+        update_cache: yes
+      notify: install tomcat_admin
+    - name: change tomcat port
+      replace:
+        regexp: 8080
+        replace: 8081
+        path: /etc/tomcat10/server.xml
+      notify: restart-tomcat
+  handlers:
+    - name: install tomcat_admin
+      apt:
+        name: tomcat10-admin
+        state: present
+        update_cache: yes
+    - name: restart-tomcat
+      service:
+        name: tomcat10
+        state: restarted

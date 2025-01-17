@@ -1,0 +1,17 @@
+---
+- name: handlers in playbooks, install tomcat, and tomcat_admin
+  hosts: all
+  become: true
+  tasks:
+    - name: install tomcat10
+      apt:
+        name: tomcat10
+        state: present
+        update_cache: yes
+      notify: install tomcat_admin
+  handlers:
+    - name: install tomcat_admin
+      apt:
+        name: tomcat10-admin
+        state: present
+        update_cache: yes
